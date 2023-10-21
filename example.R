@@ -277,9 +277,7 @@ colnames(tmp)<-c("Ligand","Receptor","tf","value")
 tmp<-unique(tmp)
 
 #fData demonstrate important ligands Tgfa, Ngf, Col5a2, Il11, Col4a2, Jag1, Col18a1  Hspg2)
-
 tmp<-fData
-
 tmp1<-tmp[order(tmp$value,decreasing = T),][1:50,]
 tmp.df<-tmp1
 
@@ -314,7 +312,6 @@ p <- ggplot(as.data.frame(subdf),
             size = 2.6, face = "bold", color = "black", aes(label = after_stat(stratum)),
             reverse = T) +
   scale_x_continuous(breaks = 1:3, labels = c("Ligand", "Receptor", "TF")) +
-
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         axis.title.x = element_blank(),
@@ -338,8 +335,6 @@ p <- ggplot(as.data.frame(subdf),
 p
 
 ########### Circos plot ##########
-library(gridBase)
-library(circlize)
 cell_color <- data.frame(color=c('#e31a1c','#1f78b4','#e31a1c','#1f78b4',
                                  'peachpuff','lightgrey','lightpink'
 ), stringsAsFactors = FALSE)

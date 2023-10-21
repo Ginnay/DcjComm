@@ -8,6 +8,7 @@ This repository contains the code of DcjComm, an R package to perorm cell cluste
 DcjComm is available on GitLab at https://github.com/Ginnay/DcjComm
 
 library(devtools)
+
 devtools::install_github("Ginnay/DcjComm")
 
 ## Getting started

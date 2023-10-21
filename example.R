@@ -63,13 +63,13 @@ data<-log2(data+1)
 pbmc <- CreateSeuratObject(counts = data, project = "scrna", min.cells = 0, min.features = 0)
 
 ########## Assign cell cluster according to marker genes and number of cell types ##########
-Label[Label == 1] = "BCells" ##'Cd79a', 'Cd79b', 'Cd74', 'Cd19'# B --cluster1
-Label[Label == 2] = "Macrophages" ##"Cd74","Cd14","Csf1r"# Macro --cluster2
-Label[Label == 3] = "LuminalEpithelialCells" ##"Krt8","Krt18","Krt19"# Luminal --cluster3
-Label[Label == 4] = "EndothelialCells" ##'Pecam1', 'Nrp1', 'Kdr','Oit3' #Endo --cluster4
-Label[Label == 6] = "BasalCells"  ##"Krt14","Krt5","Krt17")) # Basal --cluster6
-Label[Label == 5] = "Fibroblasts" ##number of cell types
-Label[Label == 7] = "TCells" ##number of cell types
+Label[Label == 1] = "BCells" 
+Label[Label == 2] = "Macrophages" 
+Label[Label == 3] = "LuminalEpithelialCells"
+Label[Label == 4] = "EndothelialCells" 
+Label[Label == 6] = "BasalCells" 
+Label[Label == 5] = "Fibroblasts"
+Label[Label == 7] = "TCells" 
 
 group<-Label
 pbmc@meta.data[["RNA_snn_res.0.06"]]<-group
@@ -139,7 +139,6 @@ library(ggrepel)
 library(ggridges)
 library(DOSE)
 
-
 gene_expr<-as.data.frame(gene_expr)
 Org = "Mus musculus"
 CCI <- Compute_CCI(
@@ -148,6 +147,7 @@ CCI <- Compute_CCI(
 )
 expr_l_r <-CCI$expr_l_r_log2_scale
 expr_Sinter<-CCI[["expr_Sinter"]]
+
 ####################################################
 ########## PART 4: Determination of modules ##########
 ####################################################
@@ -184,15 +184,11 @@ cluster_L<-str_split(newdata$cols, "-", simplify = T)[,2]
 cluster_R<-str_split(newdata$cols, "-", simplify = T)[,1]
 data <- data.frame(cluster_R,cluster_L)
 
-#path<-"F:/DrjCCI/code"
-#setwd(path)
 source('visualization.R')
-
 library(dplyr)
 library(ggplot2)
 d<-scSeqComm_heatmap_cardinality(data = data, title = "Number of ligand-receptor of cell communications")
 d
-
 
 ########## Heatmap plot of interaction ##########
 y = "cluster_L"
@@ -280,31 +276,7 @@ tmp<-comm[,c("ligand","receptor","tf","tf_PPR")]
 colnames(tmp)<-c("Ligand","Receptor","tf","value")
 tmp<-unique(tmp)
 
-#important ligands Tgfa, Ngf, Col5a2, Il11, Col4a2, Jag1, Col18a1  Hspg2)
-fData1 = tmp[grepl('Tgfa',tmp$Ligand),]
-fData2 = tmp[grepl('Ngf',tmp$Ligand),]
-fData3 = tmp[grepl('Col5a2',tmp$Ligand),]
-fData4 = tmp[grepl('Tl11',tmp$Ligand),]
-fData5 = tmp[grepl('Col4a2',tmp$Ligand),]
-fData6 = tmp[grepl('Jag1',tmp$Ligand),]
-fData7 = tmp[grepl('Col18a1',tmp$Ligand),]
-fData8 = tmp[grepl('Hspg2',tmp$Ligand),]
-
-#important receptor Gpc1, Procr, Fzd7, Itga5, Ldlr, Tlr2, Lrp6, Ephb1, and Tfrc
-fData9 = tmp[grepl('Gpc1',tmp$Receptor),]
-fData10 = tmp[grepl('Procr',tmp$Receptor),]
-fData11 = tmp[grepl('Fzd7',tmp$Ligand),]
-fData12 = tmp[grepl('Itga5',tmp$Receptor),]
-fData13 = tmp[grepl('Ldlr',tmp$Ligand),]
-fData14 = tmp[grepl('Tlr2',tmp$Receptor),]
-fData15 = tmp[grepl('Lrp6',tmp$Ligand),]
-fData16 = tmp[grepl('Ephb1',tmp$Receptor),]
-fData17 = tmp[grepl('Tfrc',tmp$Receptor),]
-
-fData = rbind(fData1,fData2,fData3,fData4,fData5,fData6,fData7,
-              fData8,fData9,fData10,fData11,fData12,fData13,
-              fData14,fData15,fData16,fData17)
-fData = unique(fData)
+#fData demonstrate important ligands Tgfa, Ngf, Col5a2, Il11, Col4a2, Jag1, Col18a1  Hspg2)
 
 tmp<-fData
 

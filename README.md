@@ -1,5 +1,5 @@
 # DcjComm
-DcjComm jointly performs dimension reduction, clustering and communication network inference for single-cell transcriptomics” to Nature Communications
+DcjComm jointly performs dimension reduction, clustering and communication network inference for single-cell transcriptomics
 
 This repository contains the code of DcjComm, an R package to perform multiple scRNA-seq data analysis tasks coherently
 
